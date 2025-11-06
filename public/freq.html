@@ -98,7 +98,62 @@
         </button>
     </header>
 
-    <main>
+    <!-- <main>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Controle de Faltas por Aluno</h1>
+            <p>Registre as faltas dos alunos por matéria</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" >Registrar Falta</button>
+            <button class="tab" onclick=" listarfrequencia()">Histórico de Faltas</button>
+            <button class="tab">Relatórios</button>
+        </div>
+
+        <div class="content">
+            <div class="form-section">
+                <h2>Registrar Falta</h2>
+                <p class="form-description">Selecione o aluno e preencha os dados da falta.</p>
+                
+                <div class="form-group">
+                    <label for="aluno">Aluno</label>
+                    <select id="aluno">
+                        <option value="">Selecione um aluno</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="data">Data da Falta</label>
+                    <input type="date" id="data" placeholder="dd / mm / aaaa">
+                </div>
+
+                <div class="form-group">
+                    <label for="materia">Matéria</label>
+                    <select id="materia">
+                        <option value="">Selecione a matéria</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="justificada">Justificada</label>
+                    <select id="justificada">
+                        <option value="nao">não foi justificada</option>
+                        <option value="sim">consulta medica</option>
+                        <option value="sim">falecimento de um familiar</option>
+                        <option value="sim">apresentou mal-estar fisico</option>
+                    </select>
+                </div>
+
+                <button class="submit-btn" onclick="cadastrarfreq(event)">Registrar Falta</button>
+                <button class="submit-btn" onclick="atualizarfrequencia()">Editar</button>
+            </div>
+        </div>
+    </div>
+    </main> -->
+    Novo bate-papo
+<main>
 
     <div class="container">
         <div class="page-header">
@@ -152,5 +207,579 @@
         </div>
     </div>
     </main>
+refaça essas parte, deixando funcional e mais completo mas SEM USAR JAVA SCRIPT e mantendo a mesma estetica
+
+Mostrar mais
+html
+<main>
+    <div class="container">
+        <div class="page-header">
+            <h1>Controle de Faltas por Aluno</h1>
+            <p>Registre as faltas dos alunos por matéria</p>
+        </div>
+
+        <div class="tabs">
+            <input type="radio" id="tab1" name="tabs" checked>
+            <input type="radio" id="tab2" name="tabs">
+            <input type="radio" id="tab3" name="tabs">
+            
+            <label for="tab1" class="tab">Registrar Falta</label>
+            <label for="tab2" class="tab">Histórico de Faltas</label>
+            <label for="tab3" class="tab">Relatórios</label>
+
+            <!-- Conteúdo Tab 1: Registrar Falta -->
+            <div class="tab-content" id="content1">
+                <div class="form-section">
+                    <h2>Registrar Falta</h2>
+                    <p class="form-description">Selecione o aluno e preencha os dados da falta.</p>
+                    
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <label for="aluno">Aluno</label>
+                            <select id="aluno" name="aluno" required>
+                                <option value="">Selecione um aluno</option>
+                                <option value="1">Ana Silva</option>
+                                <option value="2">Bruno Costa</option>
+                                <option value="3">Carlos Mendes</option>
+                                <option value="4">Diana Oliveira</option>
+                                <option value="5">Eduardo Santos</option>
+                                <option value="6">Fernanda Lima</option>
+                                <option value="7">Gabriel Rocha</option>
+                                <option value="8">Helena Martins</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="data">Data da Falta</label>
+                            <input type="date" id="data" name="data" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="materia">Matéria</label>
+                            <select id="materia" name="materia" required>
+                                <option value="">Selecione a matéria</option>
+                                <option value="matematica">Matemática</option>
+                                <option value="portugues">Português</option>
+                                <option value="historia">História</option>
+                                <option value="geografia">Geografia</option>
+                                <option value="ciencias">Ciências</option>
+                                <option value="ingles">Inglês</option>
+                                <option value="educacao_fisica">Educação Física</option>
+                                <option value="artes">Artes</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="justificada">Justificativa</label>
+                            <select id="justificada" name="justificada" required>
+                                <option value="nao">Não foi justificada</option>
+                                <option value="consulta">Consulta médica</option>
+                                <option value="falecimento">Falecimento de um familiar</option>
+                                <option value="mal_estar">Apresentou mal-estar físico</option>
+                                <option value="outro">Outro motivo justificado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="observacoes">Observações (opcional)</label>
+                            <textarea id="observacoes" name="observacoes" rows="3" placeholder="Adicione informações adicionais sobre a falta..."></textarea>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="submit" class="submit-btn">Registrar Falta</button>
+                            <button type="reset" class="reset-btn">Limpar Formulário</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Conteúdo Tab 2: Histórico de Faltas -->
+            <div class="tab-content" id="content2">
+                <div class="form-section">
+                    <h2>Histórico de Faltas</h2>
+                    <p class="form-description">Visualize e gerencie o histórico de faltas registradas.</p>
+                    
+                    <div class="filter-section">
+                        <form method="get" action="">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="filtro-aluno">Filtrar por Aluno</label>
+                                    <select id="filtro-aluno" name="filtro-aluno">
+                                        <option value="">Todos os alunos</option>
+                                        <option value="1">Ana Silva</option>
+                                        <option value="2">Bruno Costa</option>
+                                        <option value="3">Carlos Mendes</option>
+                                        <option value="4">Diana Oliveira</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="filtro-materia">Filtrar por Matéria</label>
+                                    <select id="filtro-materia" name="filtro-materia">
+                                        <option value="">Todas as matérias</option>
+                                        <option value="matematica">Matemática</option>
+                                        <option value="portugues">Português</option>
+                                        <option value="historia">História</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="filtro-periodo">Período</label>
+                                    <select id="filtro-periodo" name="filtro-periodo">
+                                        <option value="mes">Último mês</option>
+                                        <option value="bimestre">Bimestre atual</option>
+                                        <option value="semestre">Semestre atual</option>
+                                        <option value="ano">Ano letivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="filter-btn">Aplicar Filtros</button>
+                        </form>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Matéria</th>
+                                    <th>Data</th>
+                                    <th>Justificada</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ana Silva</td>
+                                    <td>Matemática</td>
+                                    <td>05/11/2025</td>
+                                    <td><span class="badge badge-success">Sim</span></td>
+                                    <td>
+                                        <a href="#" class="action-link">Editar</a>
+                                        <a href="#" class="action-link delete">Excluir</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bruno Costa</td>
+                                    <td>Português</td>
+                                    <td>04/11/2025</td>
+                                    <td><span class="badge badge-danger">Não</span></td>
+                                    <td>
+                                        <a href="#" class="action-link">Editar</a>
+                                        <a href="#" class="action-link delete">Excluir</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Carlos Mendes</td>
+                                    <td>História</td>
+                                    <td>03/11/2025</td>
+                                    <td><span class="badge badge-success">Sim</span></td>
+                                    <td>
+                                        <a href="#" class="action-link">Editar</a>
+                                        <a href="#" class="action-link delete">Excluir</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo Tab 3: Relatórios -->
+            <div class="tab-content" id="content3">
+                <div class="form-section">
+                    <h2>Relatórios de Frequência</h2>
+                    <p class="form-description">Gere relatórios detalhados sobre as faltas dos alunos.</p>
+                    
+                    <div class="report-cards">
+                        <div class="report-card">
+                            <h3>Relatório Individual</h3>
+                            <p>Visualize o histórico completo de faltas de um aluno específico.</p>
+                            <form method="post" action="">
+                                <select name="relatorio-aluno" required>
+                                    <option value="">Selecione o aluno</option>
+                                    <option value="1">Ana Silva</option>
+                                    <option value="2">Bruno Costa</option>
+                                    <option value="3">Carlos Mendes</option>
+                                </select>
+                                <button type="submit" class="report-btn">Gerar Relatório</button>
+                            </form>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Relatório por Turma</h3>
+                            <p>Veja a frequência geral de uma turma específica.</p>
+                            <form method="post" action="">
+                                <select name="relatorio-turma" required>
+                                    <option value="">Selecione a turma</option>
+                                    <option value="6a">6º Ano A</option>
+                                    <option value="6b">6º Ano B</option>
+                                    <option value="7a">7º Ano A</option>
+                                </select>
+                                <button type="submit" class="report-btn">Gerar Relatório</button>
+                            </form>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Relatório por Matéria</h3>
+                            <p>Analise as faltas registradas em cada disciplina.</p>
+                            <form method="post" action="">
+                                <select name="relatorio-materia" required>
+                                    <option value="">Selecione a matéria</option>
+                                    <option value="matematica">Matemática</option>
+                                    <option value="portugues">Português</option>
+                                    <option value="historia">História</option>
+                                </select>
+                                <button type="submit" class="report-btn">Gerar Relatório</button>
+                            </form>
+                        </div>
+
+                        <div class="report-card">
+                            <h3>Alunos em Risco</h3>
+                            <p>Identifique alunos que ultrapassaram o limite de faltas.</p>
+                            <form method="post" action="">
+                                <input type="number" name="limite-faltas" placeholder="Limite de faltas" min="1" value="15" required>
+                                <button type="submit" class="report-btn alert">Gerar Alerta</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="stats-summary">
+                        <div class="stat-card">
+                            <h4>Total de Faltas (Mês)</h4>
+                            <p class="stat-number">42</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Faltas Justificadas</h4>
+                            <p class="stat-number">28</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Faltas Não Justificadas</h4>
+                            <p class="stat-number">14</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Taxa de Frequência</h4>
+                            <p class="stat-number">94%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+/* Tabs com Pure CSS */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    position: relative;
+}
+
+.tabs input[type="radio"] {
+    display: none;
+}
+
+.tabs .tab {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    bottom: -2px;
+}
+
+.tabs input[type="radio"]:checked + .tab {
+    color: #4CAF50;
+    border-bottom-color: #4CAF50;
+}
+
+.tabs .tab:hover {
+    color: #4CAF50;
+    background: #f5f5f5;
+}
+
+/* Conteúdo das Tabs */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3 {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* Botões */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.submit-btn,
+.reset-btn,
+.filter-btn,
+.report-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn,
+.filter-btn,
+.report-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.submit-btn:hover,
+.filter-btn:hover,
+.report-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.reset-btn {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.reset-btn:hover {
+    background: #e0e0e0;
+}
+
+.report-btn.alert {
+    background: #ff9800;
+}
+
+.report-btn.alert:hover {
+    background: #f57c00;
+}
+
+/* Filtros */
+.filter-section {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+/* Tabela */
+.table-container {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.data-table thead {
+    background: #f5f5f5;
+}
+
+.data-table th,
+.data-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.data-table th {
+    font-weight: 600;
+    color: #333;
+}
+
+.data-table tr:hover {
+    background: #f9f9f9;
+}
+
+/* Badges */
+.badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.badge-danger {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Links de Ação */
+.action-link {
+    color: #4CAF50;
+    text-decoration: none;
+    margin-right: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+.action-link.delete {
+    color: #f44336;
+}
+
+/* Cards de Relatório */
+.report-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.report-card {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.report-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.report-card h3 {
+    margin: 0 0 12px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.report-card p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.report-card select,
+.report-card input {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.report-card button {
+    width: 100%;
+}
+
+/* Resumo de Estatísticas */
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    padding: 24px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-card h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.stat-card .stat-number {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .button-group button {
+        width: 100%;
+    }
+}
+</style>
+
 </body>
 </html>
