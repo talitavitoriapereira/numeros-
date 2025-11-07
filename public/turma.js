@@ -1,15 +1,17 @@
+alert("foi");
 async function cadastrarturma(event) {
     event.preventDefault();
 
-    const turma= {
-        aluno: document.getElementById("ataAluno").value,
-        cgm: document.getElementById("ataAluno").value,
-        dia: document.getElementById("ataData").value,
-        assunto: document.getElementById("ataAssunto").value,
-        conteudo: document.getElementById("ataConteudo").value,
-        encaminhamento: document.getElementById("ataEncaminhamentos").value,
-        monitor: document.getElementById("ataMonitor").value,
-        prof: document.getElementById("ataProfessor").value,
+    const turma = {
+        nome_turma: document.getElementById("turma-nome").value,
+        codigo: document.getElementById("turma-codigo").value,
+        turno: document.getElementById("turma-turno").value,
+        curso: document.getElementById("turma-curso").value,
+        ano: document.getElementById("turma-ano").value,
+        ano_letivo:document.getElementById("turma-ano-letivo").value,
+        capacidade: document.getElementById("turma-capacidade").value,
+        sala: document.getElementById("turma-sala").value,
+        coordenador: document.getElementById("turma-coordenandor").value,
     };
 
     try {
@@ -41,6 +43,7 @@ async function listarturma() {
     const turno = document.getElementById("turma-turno").value.trim();
     const curso = document.getElementById("turma-curso").value.trim();
     const ano = document.getElementById("turma-ano").value.trim();
+     const ano_letivo = document.getElementById(" turma-ano-letivo").value.trim();
     const capacidade = document.getElementById("turma-capacidade").value.trim();
     const sala = document.getElementById("turma-sala").value.trim();
     const coordenador = document.getElementById("turma-coordenandor").value.trim();
@@ -60,19 +63,17 @@ async function listarturma() {
         tabela.innerHTML = "";
 
         if (!Array.isArray(turma) || turma.length === 0) {
-            tabela.innerHTML = '<tr><td colspan="8">Nenhum turma encontrado.</td></tr>';
+            tabela.innerHTML =
+                '<tr><td colspan="8">Nenhum turma encontrado.</td></tr>';
         } else {
             ata.forEach((turmaItem) => {
                 const linha = document.createElement("tr");
                 linha.innerHTML = `
                     <td>${turmaItem.nome_turma}</td>
                     <td>${turmaItem.codigo}</td>
-                    <td>${turmaItem.turno}</td>
                     <td>${turmaItem.curso}</td>
                     <td>${turmaItem.ano}</td>
-                    <td>${turmaItem.capacidade}</td>
                     <td>${turmaItem.sala}</td>
-                     <td>${turmaItem.coordenador}</td>
                 `;
                 tabela.appendChild(linha);
             });
@@ -89,6 +90,7 @@ async function atualizarturma() {
     const turno = document.getElementById("turma-turno").value;
     const curso = document.getElementById("turma-curso").value;
     const ano = document.getElementById("turma-ano").value;
+    const ano_letivo = document.getElementById(" turma-ano-letivo").value;
     const capacidade = document.getElementById("turma-capacidade").value;
     const sala = document.getElementById("turma-sala").value;
     const coordenador = document.getElementById("turma-coordenandor").value;
@@ -98,7 +100,7 @@ async function atualizarturma() {
         return;
     }
 
-    const turmaAtualizado = {  };
+    const turmaAtualizado = {};
 
     try {
         const respo = await fetch(`/turma/codigo/${codigo}`, {
