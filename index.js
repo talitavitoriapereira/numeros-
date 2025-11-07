@@ -153,11 +153,12 @@ db.serialize(() => {
       // Tabela turma
       db.run(`
         CREATE TABLE IF NOT EXISTS turma (
-            codigo INTEGER PRIMARY KEY AUTOINCREMENT,
+            codigo INTEGER PRIMARY KEY ,
             nome_turma TEXT NOT NULL,
             curso TEXT NOT NULL,
             turno INTEGER NOT NULL,
             ano DATE NOT NULL,
+            ano_letivo DATE NOT NULL
             capacidade TEXT NOT NULL,
             coordenador TEXT,
             sala TEXT
@@ -567,14 +568,14 @@ app.listen(port, () => {
 // ///////////////////////////// Rotas para turma /////////////////////////////
 // POST: Cadastrar turma
 app.post('/turma', (req, res) => {
-    const { nome_turma,codigo,turno,curso,ano,capacidade,sala,coordenador } = req.body;
+    const { nome_turma,codigo,turno,curso,ano,ano_letivo,capacidade,sala,coordenador } = req.body;
 
-    if (!nome_turma|| !codigo || curso === undefined || !ano || !coordenador) {
-        return res.status(400).json({ error: 'nome, codigo, curso, ano e coordenador são obrigatórios.' });
+    if (!nome_turma|| !codigo || curso === undefined || !ano || !coordenador  || !ano_letivo) {
+        return res.status(400).json({ error: 'nome, codigo, curso, ano , ano letivo e coordenador são obrigatórios.' });
     }
 
-    const query = `INSERT INTO frequencia (nome_turma,codigo,turno,curso,ano,capacidade,sala,coordenador) VALUES (?,?,?,?,?,?,?,?)`;
-    db.run(query, [nome_turma,codigo,turno,curso,ano,capacidade,sala,coordenador], function (err) {
+    const query = `INSERT INTO frequencia (nome_turma,codigo,turno,curso,ano,ano_letivo,capacidade,sala,coordenador) VALUES (?,?,?,?,?,?,?,?,?)`;
+    db.run(query, [nome_turma,codigo,turno,curso,ano,ano_letivo,capacidade,sala,coordenador], function (err) {
         if (err) {
             console.error('Erro no INSERT turma:', err.message);
             return res.status(500).json({ error: 'Erro ao cadastrar turma.' });
@@ -620,10 +621,10 @@ app.get('/turma', (req, res) => {
 // PUT: Atualizar turma por codigp
 app.put('/turma/:codigo', (req, res) => {
     const { codigo } = req.params;
-    const { nome_turma,turno,curso,ano,capacidade,sala,coordenador} = req.body;
+    const { nome_turma,turno,curso,ano,ano_letivo,capacidade,sala,coordenador} = req.body;
 
-    const query = `UPDATE turma SET nome_turma = ?,codigo = ?,turno =? ,curso =? ,ano =? ,capacidade =? ,sala =? ,coordenador =?`;
-    db.run(query, [nome_turma,codigo,turno,curso,ano,capacidade,sala,coordenador], function (err) {
+    const query = `UPDATE turma SET nome_turma = ?,codigo = ?,turno =? ,curso =? ,ano =?, ano_letivo =? ,capacidade =? ,sala =? ,coordenador =?`;
+    db.run(query, [nome_turma,codigo,turno,curso,ano,ano_letivo,capacidade,sala,coordenador], function (err) {
         if (err) {
             console.error('Erro no UPDATE frequencia:', err.message);
             return res.status(500).json({ error: 'Erro ao atualizar turma.' });
