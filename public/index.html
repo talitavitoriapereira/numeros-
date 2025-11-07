@@ -344,7 +344,7 @@
                         </div>
                         
                         <div class="btn-container">
-                            <button type="button" class="btn btn-secondary" onclick="listarAlunos()">Listar Alunos</button>
+                            <button type="submit" class="btn btn-secondary" onclick="listarAlunos()">Listar Alunos</button>
                             <button type="button" class="btn btn-danger" onclick="cancelarCadastro('aluno')">Cancelar</button>
                             <button type="submit" class="btn btn-submit" onclick="cadastrarAluno(event)">Cadastrar Aluno</button>
                         </div>
@@ -376,15 +376,14 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>CGM</th>
-                <th>F.O</th>
-                <th>Encaminhamentos</th>
-                <th>Atas</th>
+                <th>Cgm</th>
+                <th>Cpf</th>
+                <th>Email</th>
                 <th>Turma</th>
                 <th>Telefone Responsavel</th>
             </tr>
         </thead>
-        <tbody >
+        <tbody  id="tabela-aluno">
             <!-- Linhas serão preenchidas pelo JavaScript -->
         </tbody>
         </table>
@@ -612,7 +611,6 @@
                         </table>
                     </div> -->
             <div class="student-info" id="studentInfo">
-             <button type="button"  class="alinhaBtns">Listar Histórico</button>
 
         <table>
         <thead>
@@ -625,7 +623,7 @@
                 <th>Data Admissão</th>
             </tr>
         </thead>
-        <tbody >
+        <tbody id="tabela-funcionario">
             <!-- Linhas serão preenchidas pelo JavaScript -->
         </tbody>
         </table>
@@ -746,46 +744,29 @@
                         <!-- Botões de ação -->
                         <div class="btn-container">
                             <button type="button" class="btn btn-secondary" onclick="listarturma()">Listar Turmas</button>
-                            <button type="button" class="btn btn-danger" onclick="limparFormulario()">Cancelar</button>
-                            <button type="submit" class="btn btn-submit" onclick="cadastrarata(event)">Cadastrar Turma</button>
+                            <button type="button" class="btn btn-danger" onclick="limparturma()">Cancelar</button>
+                            <button type="submit" class="btn btn-submit" onclick="cadastrarturma(event)">Cadastrar Turma</button>
                         </div>
                     </form>
 
                     <!-- Tabela de listagem de turmas -->
                     <div class="turma-info" id="turmaInfo" style="display: none; margin-top: 30px;">
                         <h3>Lista de Turmas Cadastradas</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Código</th>
-                                    <th>Ano/Série</th>
-                                    <th>Turno</th>
-                                    <th>Curso</th>
-                                    <th>Capacidade</th>
-                                    <th>Sala</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabela-turma">
-                                <!-- Linhas serão preenchidas pelo JavaScript -->
-                            </tbody>
-                        </table>
+                        
                     </div>
                     <div class="student-info" id="studentInfo">
-             <button type="button"  class="alinhaBtns">Listar Histórico</button>
-
         <table>
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Codigo/th>
-                <th>Ano/serie</th>
+                <th>Codigo</th>
+                <th>Ano</th>
                 <th>curso</th>
                 <th>ano letivo</th>
     
             </tr>
         </thead>
-        <tbody >
+        <tbody id="tabela-turma" >
             <!-- Linhas serão preenchidas pelo JavaScript -->
         </tbody>
         </table>
