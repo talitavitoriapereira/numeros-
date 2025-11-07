@@ -103,8 +103,7 @@ async function atualizarAluno() {
     const cpf = document.getElementById("aluno-cpf").value;
     const email = document.getElementById("aluno-email").value;
     const turma = document.getElementById("aluno-turma").value;
-    const telefone_responsavel =
-        document.getElementById("resp0-telefone").value;
+    const telefone_responsavel = document.getElementById("resp0-telefone").value;
 
     const alunoAtualizado = {
         nome,
