@@ -11,7 +11,7 @@ async function cadastrarturma(event) {
         ano_letivo:document.getElementById("turma-ano-letivo").value,
         capacidade: document.getElementById("turma-capacidade").value,
         sala: document.getElementById("turma-sala").value,
-        coordenador: document.getElementById("turma-coordenandor").value,
+        coordenador: document.getElementById("turma-coordenador").value,
     };
 
     try {
@@ -120,3 +120,4 @@ async function atualizarturma() {
         alert("Erro ao atualizar turma.");
     }
 }
+
