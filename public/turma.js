@@ -1,4 +1,3 @@
-alert("foi");
 async function cadastrarturma(event) {
     event.preventDefault();
 
@@ -26,7 +25,7 @@ async function cadastrarturma(event) {
         const result = await response.json();
         if (response.ok) {
             alert("turma cadastrado com sucesso!");
-            //document.getElementById('ata-atarm').reset();
+            //document.getElementById('turma-form').reset();
         } else {
             alert(`Erro: ${result.message}`);
         }
@@ -38,25 +37,15 @@ async function cadastrarturma(event) {
 
 // Função para listar todos as turmas
 async function listarturma() {
-    const nome_turma = document.getElementById("turma-nome").value.trim();
     const codigo = document.getElementById("turma-codigo").value.trim();
-    const turno = document.getElementById("turma-turno").value.trim();
-    const curso = document.getElementById("turma-curso").value.trim();
-    const ano = document.getElementById("turma-ano").value.trim();
-     const ano_letivo = document.getElementById(" turma-ano-letivo").value.trim();
-    const capacidade = document.getElementById("turma-capacidade").value.trim();
-    const sala = document.getElementById("turma-sala").value.trim();
-    const coordenador = document.getElementById("turma-coordenandor").value.trim();
-
     let url = "/turma"; // URL padrão
 
     if (codigo) {
         url += `?codigo=${codigo}`;
     }
-
     try {
         const respo = await fetch(url);
-        if (!respo.ok) throw new Error(`Erro HTTP: ${respo.status}`);
+        if (!respo.ok)throw new Error(`Erro HTTP: ${respo.status}`);
         const turma = await respo.json();
 
         const tabela = document.getElementById("tabela-turma");
@@ -64,9 +53,9 @@ async function listarturma() {
 
         if (!Array.isArray(turma) || turma.length === 0) {
             tabela.innerHTML =
-                '<tr><td colspan="8">Nenhum turma encontrado.</td></tr>';
+                '<tr><td colspan="5">Nenhum turma encontrado.</td></tr>';
         } else {
-            ata.forEach((turmaItem) => {
+            turma.forEach((turmaItem) => {
                 const linha = document.createElement("tr");
                 linha.innerHTML = `
                     <td>${turmaItem.nome_turma}</td>
@@ -79,11 +68,11 @@ async function listarturma() {
             });
         }
     } catch (error) {
-        console.error("Erro ao listar ata:", error);
+        console.error("Erro ao listar turma:", error);
     }
 }
 
-// Função para atualizar as informações da ata
+// Função para atualizar as informações da turma
 async function atualizarturma() {
     const nome_turma = document.getElementById("turma-nome").value;
     const codigo = document.getElementById("turma-codigo").value;
@@ -100,7 +89,17 @@ async function atualizarturma() {
         return;
     }
 
-    const turmaAtualizado = {};
+    const turmaAtualizado = {
+        nome_turma,
+        codigo,
+        turno,
+        curso,
+        ano,
+        ano_letivo, 
+        capacidade,
+        sala,
+        coordenador 
+};
 
     try {
         const respo = await fetch(`/turma/codigo/${codigo}`, {
@@ -113,7 +112,7 @@ async function atualizarturma() {
             alert("turma atualizada com sucesso!");
         } else {
             const errorMessage = await respo.text();
-            alert("Erro ao atualizar ata: " + errorMessage);
+            alert("Erro ao atualizar turma: " + errorMessage);
         }
     } catch (error) {
         console.error("Erro ao atualizar turma:", error);
