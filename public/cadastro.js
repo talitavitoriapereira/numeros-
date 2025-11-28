@@ -18,7 +18,7 @@ async function cadastrarAluno(event) {
         estado: document.getElementById("aluno-estado").value,
         cgm: document.getElementById("aluno-matricula").value,
         curso: document.getElementById("aluno-curso").value,
-        turma: document.getElementById("aluno-turma").value,
+        turna: document.getElementById("aluno-turma").value,
         turno: document.getElementById("aluno-turno").value,
         nome_responsavel: document.getElementById("resp0-nome").value,
         telefone_responsavel: document.getElementById("resp0-telefone").value,
