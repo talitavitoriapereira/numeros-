@@ -1,136 +1,138 @@
-async function cadastrarAluno(event) {
+async function cadastrarfuncionario(event) {
     event.preventDefault();
 
-    const aluno = {
-        nome: document.getElementById("aluno-nome").value,
-        telefone: document.getElementById("aluno-telefone").value,
-        email: document.getElementById("aluno-email").value,
-        cpf: document.getElementById("aluno-cpf").value,
-        rg: document.getElementById("aluno-rg").value,
-        genero: document.getElementById("aluno-genero").value,
-        data_de_nascimento: document.getElementById("aluno-data-nascimento").value,
-        cep: document.getElementById("aluno-cep").value,
-        logradouro: document.getElementById("aluno-logradouro").value,
-        numero: document.getElementById("aluno-numero").value,
-        complemento: document.getElementById("aluno-complemento").value,
-        cidade: document.getElementById("aluno-cidade").value,
-        bairro: document.getElementById("aluno-bairro").value,
-        estado: document.getElementById("aluno-estado").value,
-        cgm: document.getElementById("aluno-matricula").value,
-        curso: document.getElementById("aluno-curso").value,
-        turna: document.getElementById("aluno-turma").value,
-        turno: document.getElementById("aluno-turno").value,
-        nome_responsavel: document.getElementById("resp0-nome").value,
-        telefone_responsavel: document.getElementById("resp0-telefone").value,
-        parentesco_responsavel: document.getElementById("resp0-parentesco").value,
-        cpf_responsavel: document.getElementById("resp0-cpf").value,
-        email_responsavel: document.getElementById("resp0-email").value,
+    const funcionario = {
+        nome: document.getElementById("func-nome").value,
+        data_de_nascimento: document.getElementById("func-data-nascimento")
+            .value,
+        cpf: document.getElementById("func-cpf").value,
+        rg: document.getElementById("func-rg").value,
+        genero: document.getElementById("func-genero").value,
+        estado_civil: document.getElementById("func-estado-civil").value,
+        email: document.getElementById("func-email").value,
+        email_institucional: document.getElementById("func-email-institucional")
+            .value,
+        telefone: document.getElementById("func-telefone").value,
+        telefone_alternativo: document.getElementById(
+            "func-telefone-alternativo",
+        ).value,
+        cep: document.getElementById("func-cep").value,
+        logradouro: document.getElementById("func-logradouro").value,
+        numero: document.getElementById("func-numero").value,
+        complemento: document.getElementById("func-complemento").value,
+        bairro: document.getElementById("func-bairro").value,
+        cidade: document.getElementById("func-cidade").value,
+        estado: document.getElementById("func-estado").value,
+        data_adimissão: document.getElementById("func-data-admissao").value,
+        cargo: document.getElementById("func-cargo").value,
+        carga_horaria: document.getElementById("func-carga-horaria").value,
+        contrato: document.getElementById("func-tipo-contrato").value,
     };
 
     try {
-        const respo = await fetch("/aluno", {
+        const response = await fetch("/funcionario", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(aluno),
+            body: JSON.stringify(funcionario),
         });
 
-        const result = await respo.json();
-        if (respo.ok) {
-            alert("Aluno cadastrado com sucesso!");
-            // document.getElementById('aluno-form').reset(); // Descomente se necessário
+        const result = await response.json();
+        if (response.ok) {
+            alert("Funcionario cadastrado com sucesso!");
+            //document.getElementById('funcionario-form').reset();
         } else {
-            alert(`Erro: ${result.message || "Erro desconhecido"}`);
+            alert(`Erro: ${result.message}`);
         }
     } catch (err) {
         console.error("Erro na solicitação:", err);
-        alert("Erro ao cadastrar aluno.");
+        alert("Erro ao cadastrar funcionario.");
     }
 }
 
-// Função para listar todos os alunos ou buscar alunos por CPF
-async function listarAlunos() {
-    // const cpf = document.getElementById('cpf').value.trim();  // Pega o valor do CPF digitado no input
-    //const nome = document.getElementById('aluno-nome').value.trim();
-    const cgm = document.getElementById("aluno-matricula").value.trim();
-    //const email = document.getElementById('aluno-email').value.trim();
-    //const telefone_responsavel = document.getElementById('resp0-telefone').value.trim();
+// Função para listar todos os funcionario ou buscar funcionario por CPF
+async function listarfuncionario() {
+    const cpf = document.getElementById("func-cpf").value.trim();
+    let url = "/funcionario";
 
-    let url = "/alunos"; // URL padrão para todos os alunos
-
-    if (cgm) {
-        // Se CPF foi digitado, adiciona o parâmetro de consulta
-        url += `?cgm=${cgm}`;
+    if (cpf) {
+        url += `?cpf=${cpf}`;
     }
 
     try {
-        const response = await fetch(url);
-        const alunos = await response.json();
+        const respo = await fetch(url);
+        if (!respo.ok) throw new Error(`Erro HTTP: ${respo.status}`);
+        const funcionario = await respo.json();
 
-        const tabela = document.getElementById("tabela-aluno");
-        tabela.innerHTML = ""; // Limpa a tabela antes de preencher
+        const tabela = document.getElementById("tabela-funcionario");
+        tabela.innerHTML = "";
 
-        if (alunos.length === 0) {
-            alert("asdfasdf");
-            // Caso não encontre aluno, exibe uma mensagem
+        if (!Array.isArray(funcionario) || funcionario.length === 0) {
             tabela.innerHTML =
-                '<tr><td colspan="6">Nenhum aluno encontrado.</td></tr>';
+                '<tr><td colspan="6">Nenhum funcionario encontrado.</td></tr>';
         } else {
-            alert("ate aqui vaiggd");
-            alunos.forEach((aluno) => {
+            funcionario.forEach((item) => {
                 const linha = document.createElement("tr");
                 linha.innerHTML = `
-                    <td>${aluno.nome}</td>
-                    <td>${aluno.cgm}</td>
-                    <td>${aluno.cpf}</td>
-                    <td>${aluno.email}</td>
-                     <td>${aluno.turma}</td>
-                    <td>${aluno.telefone}</td>
+                    <td>${item.nome}</td>
+                    <td>${item.cpf}</td>
+                    <td>${item.email}</td>
+                    <td>${item.cargo}</td>
+                    <td>${item.telefone}</td>
+                    <td>${item.data_adimissão}</td>
                 `;
                 tabela.appendChild(linha);
             });
         }
     } catch (error) {
-        console.error("Erro ao listar alunos:", error);
+        console.error("Erro ao listar funcionario:", error);
     }
 }
 
-// Função para atualizar as informações do aluno
-async function atualizarAluno() {
-    const nome = document.getElementById("aluno-nome").value;
-    const cgm = document.getElementById("aluno-cgm").value;
-    const cpf = document.getElementById("aluno-cpf").value;
-    const email = document.getElementById("aluno-email").value;
-    const turma = document.getElementById("aluno-turma").value;
-    const telefone_responsavel = document.getElementById("resp0-telefone").value;
+async function atualizarfuncionario() {
+    const nome = document.getElementById("func-nome").value;
+    const cep = document.getElementById("func-cep").value;
+    const numero = document.getElementById("func-numero").value;
+    const complemento = document.getElementById("func-complemento").value;
+    const bairro = document.getElementById("func-bairro").value;
+    const cidade = document.getElementById("func-cidade").value;
+    const estado = document.getElementById("func-estado").value;
+    const email = document.getElementById("func-email").value;
+    const telefone = document.getElementById("func-telefone").value;
 
-    const alunoAtualizado = {
+    if (!nome) {
+        alert("Informe o nome do funcionário para atualizar.");
+        return;
+    }
+
+    const funcionarioAtualizado = {
         nome,
-        cgm,
-        cpf,
+        cep,
+        numero,
+        complemento,
+        bairro,
+        cidade,
+        estado,
         email,
-        turma,
-        telefone_responsavel,
+        telefone,
     };
 
     try {
-        const respo = await fetch(`/alunos/cpf/${cpf}`, {
+        const respo = await fetch(`/funcionario/nome/${nome}`, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(alunoAtualizado),
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(funcionarioAtualizado),
         });
 
         if (respo.ok) {
-            alert("Aluno atualizado com sucesso!");
+            alert("Funcionário atualizado com sucesso!");
         } else {
             const errorMessage = await respo.text();
-            alert("Erro ao atualizar aluno: " + errorMessage);
+            alert("Erro ao atualizar funcionario: " + errorMessage);
         }
     } catch (error) {
-        console.error("Erro ao atualizar aluno:", error);
-        alert("Erro ao atualizar aluno.");
+        console.error("Erro ao atualizar funcionario:", error);
+        alert("Erro ao atualizar funcionario.");
     }
 }
